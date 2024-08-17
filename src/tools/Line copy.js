@@ -10,6 +10,7 @@ export default class Line extends Tool {
     constructor(canvas, fillStyle, socket, id) {
         super(canvas, fillStyle, socket, id);
         this.listen();
+        debugger
     }
     listen() {
         this.canvas.onmousedown = this.mouseDownHandler.bind(this);
@@ -21,61 +22,18 @@ export default class Line extends Tool {
     }
     mouseDownHandler(e) {
         this.mouseDown = true;
-        // this.currentX = e.pageX - e.target.offsetLeft;
-        // this.currentY = e.pageY - e.target.offsetTop;
+        this.currentX = e.pageX - e.target.offsetLeft;
+        this.currentY = e.pageY - e.target.offsetTop;
         if (e.targetTouches) {
             this.currentX = e.targetTouches[0].pageX - e.target.offsetLeft;
             this.currentY = e.targetTouches[0].pageY - e.target.offsetTop;
-        }
-        else {
-            this.currentX = e.pageX - e.target.offsetLeft;
-            this.currentY = e.pageY - e.target.offsetTop;
         }
         this.ctx.beginPath();
         this.ctx.moveTo(this.currentX, this.currentY);
         this.saved = this.canvas.toDataURL();
     }
-    // mouseUpHandler(e) {
-    //     this.mouseDown = false;
-
-    //     // Send the line drawing data through WebSocket
-    //     this.socket.send(JSON.stringify({
-    //         method: 'draw',
-    //         id: this.id,
-    //         figure: {
-    //             type: 'line',
-    //             startX: this.currentX,
-    //             startY: this.currentY,
-    //             endX: e.pageX - e.target.offsetLeft,
-    //             endY: e.pageY - e.target.offsetTop,
-    //             color: strokeStyleState.strokeStyle.value,
-    //         }
-    //     }));
-    // }
-
     mouseUpHandler(e) {
         this.mouseDown = false;
-
-        let endX, endY;
-        console.log(
-            e,
-            e.targetTouches
-        )
-        // changedTouches
-        if (e.changedTouches && e.changedTouches[0]) {
-            // if (e.targetTouches ) {
-            this.endX = e.changedTouches[0].pageX - e.target.offsetLeft;
-            this.endY = e.changedTouches[0].pageY - e.target.offsetTop;
-        }else
-        if (e.targetTouches && e.targetTouches[0]) {
-            // if (e.targetTouches ) {
-            this.endX = e.targetTouches[0].pageX - e.target.offsetLeft;
-            this.endY = e.targetTouches[0].pageY - e.target.offsetTop;
-        } else {
-            this.endX = e.pageX - e.target.offsetLeft;
-            this.endY = e.pageY - e.target.offsetTop;
-        }
-
 
         // Send the line drawing data through WebSocket
         this.socket.send(JSON.stringify({
@@ -85,22 +43,14 @@ export default class Line extends Tool {
                 type: 'line',
                 startX: this.currentX,
                 startY: this.currentY,
-                endX: this.endX,
-                endY: this.endY,
-                // strokeColor: strokeStyleState.strokeStyle.value,
+                endX: e.pageX - e.target.offsetLeft,
+                endY: e.pageY - e.target.offsetTop,
+                // color: strokeStyleState.strokeStyle.value,
                 strokeColor: strokeStyleState.strokeStyle,
+                fillColor: this.ctx.fillStyle,
             }
         }));
-
-        //     // Закриваємо шлях
-        //     // this.ctx.closePath();
-
-        //     // Очищення координат
-        //     // this.currentX = null;
-        //     // this.currentY = null;
     }
-
-
     mouseMoveHandler(e) {
         if (this.mouseDown) {
             if (e.targetTouches) {
@@ -138,8 +88,8 @@ export default class Line extends Tool {
 
     }
 
-    static staticDraw(ctx, startX, startY, endX, endY) {
-        // ctx.strokeStyle = color;
+    static staticDraw(ctx, startX, startY, endX, endY, color) {
+        ctx.strokeStyle = color;
         ctx.beginPath();
         ctx.moveTo(startX, startY);
         ctx.lineTo(endX, endY);

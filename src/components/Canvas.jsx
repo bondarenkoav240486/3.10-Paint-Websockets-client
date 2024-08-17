@@ -163,7 +163,13 @@ const Canvas = observer(() => {
                 Circle.staticDraw(ctx, figure.x, figure.y, figure.radius, figure.fillColor);
                 break;
             case "eraser":
-                Eraser.draw(ctx, figure.x, figure.y);
+                // Eraser.draw(ctx, figure.x, figure.y);
+                // Eraser.staticDraw(ctx, figure.x, figure.y);
+                Eraser.staticDraw(
+                    ctx, figure.startX, figure.startY,
+                    figure.endX,
+                    figure.endY
+                );
                 break;
             case "line":
                 Line.staticDraw(ctx, figure.startX, figure.startY, figure.endX, figure.endY, figure.color);
