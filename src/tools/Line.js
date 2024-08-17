@@ -10,6 +10,7 @@ export default class Line extends Tool {
     constructor(canvas, fillStyle, socket, id) {
         super(canvas, fillStyle, socket, id);
         this.listen();
+        debugger
     }
     listen() {
         this.canvas.onmousedown = this.mouseDownHandler.bind(this);
@@ -44,7 +45,9 @@ export default class Line extends Tool {
                 startY: this.currentY,
                 endX: e.pageX - e.target.offsetLeft,
                 endY: e.pageY - e.target.offsetTop,
-                color: strokeStyleState.strokeStyle.value,
+                // color: strokeStyleState.strokeStyle.value,
+                strokeColor: strokeStyleState.strokeStyle,
+                fillColor: this.ctx.fillStyle,
             }
         }));
     }
@@ -77,7 +80,8 @@ export default class Line extends Tool {
             );
             this.ctx.beginPath();
             this.ctx.moveTo(this.currentX, this.currentY);
-            this.ctx.strokeStyle = strokeStyleState.strokeStyle.value;
+            // this.ctx.strokeStyle = strokeStyleState.strokeStyle.value;
+            this.ctx.strokeStyle = strokeStyleState.strokeStyle;
             this.ctx.lineTo(x, y);
             this.ctx.stroke();
         }.bind(this);

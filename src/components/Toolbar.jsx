@@ -86,7 +86,7 @@ const Toolbar = () => {
             <button
                 className="toolbar__btn line"
                 // onClick={() => toolState.setTool(new Line(canvasState.canvas, strokeStyleState.strokeStyle))}
-                onClick={() => toolState.setTool(new Line(canvasState.canvas, canvasState.socket, canvasState.sessionid))}
+                onClick={() => toolState.setTool(new Line(canvasState.canvas,strokeStyleState.strokeStyle, canvasState.socket, canvasState.sessionid))}
             />
             <button
                 className="toolbar__btn undo"

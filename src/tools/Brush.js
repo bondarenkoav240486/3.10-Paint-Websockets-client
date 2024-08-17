@@ -66,7 +66,10 @@ export default class Brush extends Tool {
                 figure: {
                     type: 'brush',
                     x: e.targetTouches[0].pageX - e.target.offsetLeft,
-                    y: e.targetTouches[0].pageY - e.target.offsetTop
+                    y: e.targetTouches[0].pageY - e.target.offsetTop,
+                    strokeColor: strokeStyleState.strokeStyle,
+                    // this.strokeStyle
+                    fillColor: this.ctx.fillStyle,
                 }
             }));
             e.preventDefault(); // Prevent default scrolling behavior
