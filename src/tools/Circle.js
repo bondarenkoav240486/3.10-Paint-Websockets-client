@@ -107,6 +107,7 @@ export default class Circle extends Tool {
             id: this.id,
             figure: {
                 type: 'finish',
+                
             }
         }));
     }
