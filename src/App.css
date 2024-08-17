@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* background-color: #BFBFBF; */
+  background-color: #bfbfbf24;
+  /* background: url('/images/pexels-photo-235985.jpeg'); */
+  /* background: url('/images/pexels-photo-235985.jpeg') no-repeat  ; */
+  /* background: url('/images/pexels-photo-129731.jpeg') no-repeat center center; */
+  /* background: url('/images/pexels-photo-326333.jpg') no-repeat center center; */
+  /* background: url('/images/pexels-photo-163999.jpg') no-repeat center center; */
+  /* background: url('/images/pexels-photo-1303081.jpg') no-repeat center center; */
+  /* background: url('/images/pexels-photo-326311.jpg') no-repeat center center; */
+
+  /* background: url('/images/pexels-photo-301378.jpg')  center center; */
+  /* background: url('/images/depositphotos_146391169-stock-photo-outdoor-wooden-floor.jpg') no-repeat center center; */
+
+  /* background-size: cover; */
+  height: 100hv;
+  height: 100%;
+}
+
+
+.App {
+  width: 100vw;
+  height: 100hw;
+  max-height: 100vw;
+  text-align: center;
+  font-family: Arial, Verdana, sans-serif;
+  color: #153643;
+  color: #5D6964;
+  font-size: 13px;
+}
+
+header {
+  /* background-color: #D9D9D9; */
+  /* background: url('/images/pexels-photo-326311.jpg') no-repeat center center; */
+  /* background: url('/images/pexels-photo-301378.jpg') no-repeat center center; */
+  /* background: url('/images/pexels-photo-235985.jpeg'); */
+
+  /* background-size: cover; */
+
+
+}
+
+.toolbar,
+.setting-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.325);
+}
+
+.toolbar {
+  background-color: #fff;
+  padding: 0 28px 10px 12px;
+}
+
+.setting-bar {
+  background-color: #fff;
+  margin-top: 7px;
+  padding: 7px 15px 7px;
+  /* border-bottom: 2px solid #71A8AE; */
+}
+
+.setting-bar .setting {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar__btn {
+  width: 25px;
+  height: 25px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-size: cover;
+  margin-left: 16px;
+  margin-top: 10px;
+}
+
+.brush {
+  background: url("assets/img/brush7.png") no-repeat center center;
+  background-size: contain;
+}
+
+.rect {
+  background: url("assets/img/rect2.png") no-repeat center center;
+  background-size: contain;
+}
+
+.circle {
+  background: url("assets/img/circle2.png") no-repeat center center;
+  background-size: contain;
+}
+
+.eraser {
+  background: url("assets/img/eraser2.png") no-repeat center center;
+  background-size: contain;
+}
+
+.line {
+  background: url("assets/img/line2.png") no-repeat center center;
+}
+
+#line-width,
+#stroke-color,
+#fill-color {
+  /*  border:2px solid #B7B7B7;*/
+  border: 1px solid #5D6964;
+  width: 28px;
+  border-radius: 3px;
+  margin: 0px 10px;
+}
+
+#line-width {
+  width: 48px;
+}
+
+.undo {
+  background: url("assets/img/undo2.png") no-repeat center center;
+  margin-left: auto;
+  background-size: contain;
+}
+
+.redo {
+  background: url("assets/img/redo2.png") no-repeat center center;
+  background-size: contain;
+}
+
+.save {
+  background: url("assets/img/save3.png") no-repeat center center;
+  background-size: contain;
+}
+
+.canvas {
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto 0;
+  padding: 10px;
+}
+
+canvas {
+  background-color: white;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.325);
+}
