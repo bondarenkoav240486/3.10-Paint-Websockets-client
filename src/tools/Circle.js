@@ -52,6 +52,8 @@ export default class Circle extends Tool {
             }));
 
         }
+        this.finishDrawing();
+
     }
     mouseMoveHandler(e) {
         if (this.mouseDown) {
@@ -98,5 +100,14 @@ export default class Circle extends Tool {
         ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
+    }
+    finishDrawing() {
+        this.socket.send(JSON.stringify({
+            method: 'draw',
+            id: this.id,
+            figure: {
+                type: 'finish',
+            }
+        }));
     }
 }
