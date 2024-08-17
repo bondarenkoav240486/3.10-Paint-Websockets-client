@@ -41,4 +41,22 @@ export default class Eraser extends Brush {
             }
         }
     }
+
+    touchMoveHandler(e) {
+        if (this.mouseDown) {
+            this.socket.send(JSON.stringify({
+                method: 'draw',
+                id: this.id,
+                figure: {
+                    type: 'eraser',
+                    x: e.targetTouches[0].pageX - e.target.offsetLeft,
+                    y: e.targetTouches[0].pageY - e.target.offsetTop,
+                    // strokeColor: strokeStyleState.strokeStyle,
+                    // this.strokeStyle
+                    // fillColor: this.ctx.fillStyle,
+                }
+            }));
+            e.preventDefault(); // Prevent default scrolling behavior
+        }
+    }
 }

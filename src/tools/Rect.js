@@ -35,6 +35,7 @@ export default class Rect extends Tool {
                 fillColor: toolState.fillColor,
             }
         }))
+        this.finishDrawing();
     }
     mouseDownHandler(e) {
         this.mouseDown = true;
@@ -89,5 +90,15 @@ export default class Rect extends Tool {
         ctx.rect(x, y, w, h)
         ctx.fill()
         ctx.stroke()
+    }
+
+    finishDrawing() {
+        this.socket.send(JSON.stringify({
+            method: 'draw',
+            id: this.id,
+            figure: {
+                type: 'finish',
+            }
+        }));
     }
 }
