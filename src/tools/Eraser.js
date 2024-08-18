@@ -8,7 +8,6 @@ export default class Eraser extends Brush {
     // }
     constructor(canvas, fillStyle, socket, id) {
         super(canvas, fillStyle, socket, id);
-        debugger
         // this.listen()
     }
     // draw(x, y) {
