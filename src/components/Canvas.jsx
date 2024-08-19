@@ -35,6 +35,7 @@ const style = {
 
 const Canvas = observer(() => {
 
+    const baseURL = process.env.REACT_APP_URL || 'http://localhost:5000';
 
 
     const [open, setOpen] = React.useState(true);
@@ -50,7 +51,10 @@ const Canvas = observer(() => {
     useEffect(() => {
         canvasState.setCanvas(canvasRef.current)
         let ctx = canvasRef.current.getContext('2d')
-        axios.get(`http://localhost:5000/image?id=${params.id}`)
+        // axios.get(`http://localhost:5000/image?id=${params.id}`)
+        // axios.get(`${process.env.URL}/image?id=${params.id}`)
+        axios.get(`${baseURL}/image?id=${params.id}`)
+
             .then(response => {
                 const img = new Image()
                 img.src = response.data
@@ -66,7 +70,10 @@ const Canvas = observer(() => {
 
     useEffect(() => {
         if (canvasState.username) {
-            const socket = new WebSocket(`ws://localhost:5000/`);
+            // const socket = new WebSocket(`ws://localhost:5000/`);
+            // const socket = new WebSocket(`ws://${process.env.ADRESSFORSOKET}/`);
+            const socket = new WebSocket(`ws://${process.env.REACT_APP_ADRESSFORSOKET}/`);
+
             canvasState.setSocket(socket)
             canvasState.setSessionId(params.id)
             toolState.setTool(new Brush(canvasRef.current, strokeStyleState.strokeStyle, socket, params.id))
@@ -125,8 +132,10 @@ const Canvas = observer(() => {
     }
 
     const mouseUpHandler = () => {
-        axios.post(`http://localhost:5000/image?id=${params.id}`, { img: canvasRef.current.toDataURL() })
-            .then(response => console.log(response.data))
+        // axios.post(`http://localhost:5000/image?id=${params.id}`, { img: canvasRef.current.toDataURL() })
+        axios.post(`${baseURL}/image?id=${params.id}`, { img: canvasRef.current.toDataURL() })
+       
+        .then(response => console.log(response.data))
 
         // Broadcast the undo action to all users in the session
         // canvasState.socket.send(JSON.stringify({
@@ -148,8 +157,6 @@ const Canvas = observer(() => {
         // ctx.strokeStyle = '#A7FF64'
         ctx.strokeStyle = figure.strokeColor;
         ctx.fillStyle =figure.fillColor;
-
-
         switch (figure.type) {
             case "brush":
                 Brush.draw(ctx, figure.x, figure.y)
@@ -178,6 +185,7 @@ const Canvas = observer(() => {
 
     return (
         <div className="canvas">
+             CANVAS!!!!!
             <Button onClick={handleOpen}>Open modal</Button>
             <Modal
                 open={open}
@@ -185,6 +193,7 @@ const Canvas = observer(() => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
+           
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Введіть ваше ім'я
