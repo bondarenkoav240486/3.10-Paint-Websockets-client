@@ -185,7 +185,6 @@ const Canvas = observer(() => {
 
     return (
         <div className="canvas">
-             CANVAS!!!!!
             <Button onClick={handleOpen}>Open modal</Button>
             <Modal
                 open={open}
