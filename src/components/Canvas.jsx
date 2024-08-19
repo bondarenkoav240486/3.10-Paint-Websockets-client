@@ -185,7 +185,7 @@ const Canvas = observer(() => {
 
     return (
         <div className="canvas">
-            <Button onClick={handleOpen}>Open modal</Button>
+            <Button onClick={handleOpen}>Введіть ваше ім'я</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -203,7 +203,7 @@ const Canvas = observer(() => {
                     >
                     </Typography>
                     <input type="text" ref={usernameRef} />
-                    <Button onClick={connectHandler}>Enter</Button>
+                    <Button onClick={connectHandler}>Ввести</Button>
                 </Box>
             </Modal>
             <canvas
