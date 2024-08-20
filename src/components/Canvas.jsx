@@ -21,6 +21,8 @@ import Line from "../tools/Line";
 import axios from 'axios'
 
 
+
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -119,17 +121,29 @@ const Canvas = observer(() => {
     }, [canvasState.username])
 
 
+    // const mouseDownHandler = () => {
+    //     // canvasState.pushToUndo(canvasRef.current.toDataURL())
+    //     // axios.post(`http://localhost:5000/image?id=${params.id}`, { img: canvasRef.current.toDataURL() })
+    //     // .then(response => console.log(response.data))
+    //     canvasState.socket.send(JSON.stringify({
+    //         method: "pushToUndo",
+    //         id: canvasState.sessionid,
+    //         // dataUrl: canvasRef.current.toDataURL()
+    //     }));
+    // }
     const mouseDownHandler = () => {
-        // canvasState.pushToUndo(canvasRef.current.toDataURL())
-        // canvasState.pushToUndo(canvasRef.current.toDataURL())
-        // axios.post(`http://localhost:5000/image?id=${params.id}`, { img: canvasRef.current.toDataURL() })
-        // .then(response => console.log(response.data))
-        canvasState.socket.send(JSON.stringify({
-            method: "pushToUndo",
-            id: canvasState.sessionid,
-            // dataUrl: canvasRef.current.toDataURL()
-        }));
-    }
+        if (canvasState.socket && canvasState.socket.readyState === WebSocket.OPEN) {
+            canvasState.socket.send(JSON.stringify({
+                method: "pushToUndo",
+                id: canvasState.sessionid,
+            }));
+        } else {
+            console.error('WebSocket is not open.');
+            console.log('WebSocket is not open.');
+            // alert('WebSocket з\'єднання ще не встановлено. Будь ласка, зачекайте.');
+            alert('WebSocket з\'єднання ще не встановлено. Обов.язково введіть своє ім.я.');
+        }
+    };
 
     const mouseUpHandler = () => {
         // axios.post(`http://localhost:5000/image?id=${params.id}`, { img: canvasRef.current.toDataURL() })
@@ -148,6 +162,7 @@ const Canvas = observer(() => {
     const connectHandler = () => {
         canvasState.setUsername(usernameRef.current.value)
         // setModal(false)
+        alert('Користувач ' + canvasState.username + ' приєднався')
         setOpen(false)
     }
 
