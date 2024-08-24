@@ -1,6 +1,5 @@
 {
   "name": "paint",
-  "homepage": "https://bondarenkoav240486.github.io/paint/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
